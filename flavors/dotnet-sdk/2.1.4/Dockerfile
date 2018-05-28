@@ -1,17 +1,17 @@
-FROM debian:8
+FROM debian:9
 
 # apt update and upgrade
 RUN apt-get update && apt-get upgrade -y
 
 # install generic requirements
-RUN apt-get install -y apt-transport-https curl
+RUN apt-get install -y apt-transport-https curl gnupg
 
 # install cake requirements
 RUN apt-get install -y mono-complete
 
 # add microsoft key
 RUN curl -s https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN curl -s https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sources.list.d/microsoft-prod.list
+RUN curl -s https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/microsoft-prod.list
 
 # install dotnet-sdk
 RUN apt-get update && apt-get install -y dotnet-sdk-2.1.4
