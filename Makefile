@@ -1,7 +1,7 @@
 DOCKER=docker
 REPOSITORY=dpsenner/cakebuild
 DOCKER_RUN_LINUX=$(DOCKER) run --rm -v $(abspath test/workspace):/workspace -w /workspace
-DOCKER_RUN_WINDOWS=$(DOCKER) run --rm -v test/workspace:/workspace -w /workspace
+DOCKER_RUN_WINDOWS=$(DOCKER) run --rm -v $(abspath test/workspace):C:/workspace -w C:/workspace
 
 build-linux: build-dotnet-core-latest build-dotnet-core-2-sdk
 push-linux: push-dotnet-core-latest push-dotnet-core-2-sdk
@@ -44,10 +44,10 @@ build-dotnet-framework-sdk:
 run-dotnet-framework-sdk: run-dotnet-framework-sdk-Default run-dotnet-framework-sdk-Hello-World
 
 run-dotnet-framework-sdk-Default: build-dotnet-framework-sdk
-	$(DOCKER_RUN_LINUX) $(REPOSITORY):dotnet-framework-sdk
+	$(DOCKER_RUN_WINDOWS) $(REPOSITORY):dotnet-framework-sdk
 
 run-dotnet-framework-sdk-Hello-World: build-dotnet-framework-sdk
-	$(DOCKER_RUN_LINUX) $(REPOSITORY):dotnet-framework-sdk --target=Hello-World
+	$(DOCKER_RUN_WINDOWS) $(REPOSITORY):dotnet-framework-sdk --target=Hello-World
 
 push-dotnet-framework-sdk: run-dotnet-framework-sdk
 	$(DOCKER) push $(REPOSITORY):dotnet-framework-sdk
