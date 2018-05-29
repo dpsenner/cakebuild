@@ -4,10 +4,11 @@ This is the repository holding dockerfiles for the cakebuild docker containers o
 
 ## Usage
 
-This repository comes with a `Makefile`. The default target is `run-all`, which builds and runs all flavors that are part of this repository.
+This repository comes with a `Makefile`. There is no default target because this repository serves both linux and windows docker containers. The following targets will build and run all containers:
 
 ```shell
-~/cakebuild$ make
+~/cakebuild$ make run-linux
+~/cakebuild$ make run-windows
 ```
 
 ## Docker Hub Repository
