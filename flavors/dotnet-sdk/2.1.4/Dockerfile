@@ -1,13 +1,7 @@
-FROM debian:9
-
-# apt update and upgrade
-RUN apt-get update && apt-get upgrade -y
+FROM dpsenner/cakebuild:debian-stretch
 
 # install generic requirements
-RUN apt-get install -y apt-transport-https curl gnupg
-
-# install cake requirements
-RUN apt-get install -y mono-complete
+RUN apt-get update && apt-get install -y apt-transport-https gnupg
 
 # add microsoft key
 RUN curl -s https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
@@ -44,12 +38,3 @@ RUN mkdir warmup \
 # all errors when attempting to restore a project are ignored and treated as warnings instead. This allows the VS
 # tooling to use -nowarn:MSB3202 to ignore issues with the .dcproj project
 ENV RestoreUseSkipNonexistentTargets false
-
-# Copy bootstrapper script
-COPY build.sh /usr/local/bin/build.sh
-
-# Make bootstrapper script executable
-RUN chmod +x /usr/local/bin/build.sh
-
-# Make the bootstrapper script the docker entrypoint
-ENTRYPOINT ["/usr/local/bin/build.sh"]
