@@ -4,9 +4,12 @@ This is the repository holding dockerfiles for the cakebuild docker containers o
 
 ## Usage
 
-Assuming you are in the workspace of this repository:
+This repository comes with a `Makefile`. The default target is `run-all`, which builds and runs all flavors that are part of this repository.
 
-```text
-$ docker build -t dpsenner/cakebuild:dotnet-sdk-2.1.4 flavors/dotnet-sdk/2.1.4/
-$ docker run -it -v `pwd`/test/workspace:/workspace -w /workspace dpsenner/cakebuild:dotnet-sdk-2.1.4
+```shell
+~/cakebuild$ make
 ```
+
+## Docker Hub Repository
+
+This repository serves the `Dockerfile` that build the containers in the docker hub repository [dpsenner/cakebuild](https://hub.docker.com/r/dpsenner/cakebuild/).
