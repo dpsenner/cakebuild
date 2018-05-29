@@ -4,36 +4,50 @@ DOCKER_RUN=$(DOCKER) run --rm -v $(shell pwd)/test/workspace:/workspace -w /work
 
 default: run-all
 
-build-all: build-dotnet-latest build-dotnet-2-sdk
+build-all: build-dotnet-core-latest build-dotnet-core-2-sdk
 
-push-all: push-dotnet-latest push-dotnet-2-sdk
+push-all: push-dotnet-core-latest push-dotnet-core-2-sdk
 
-run-all: run-dotnet-latest run-dotnet-2-sdk
+run-all: run-dotnet-core-latest run-dotnet-core-2-sdk
 
-build-dotnet-latest:
-	$(DOCKER) build -t $(REPOSITORY):dotnet-latest flavors/dotnet/latest
+build-dotnet-core-latest:
+	$(DOCKER) build -t $(REPOSITORY):dotnet-core-latest flavors/dotnet-core/latest
 
-run-dotnet-latest: run-dotnet-latest-Default run-dotnet-latest-Hello-World
+run-dotnet-core-latest: run-dotnet-core-latest-Default run-dotnet-core-latest-Hello-World
 
-run-dotnet-latest-Default: build-dotnet-latest
-	$(DOCKER_RUN) $(REPOSITORY):dotnet-latest
+run-dotnet-core-latest-Default: build-dotnet-core-latest
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-core-latest
 
-run-dotnet-latest-Hello-World: build-dotnet-latest
-	$(DOCKER_RUN) $(REPOSITORY):dotnet-latest --target=Hello-World
+run-dotnet-core-latest-Hello-World: build-dotnet-core-latest
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-core-latest --target=Hello-World
 
-push-dotnet-latest: run-dotnet-latest
-	$(DOCKER) push $(REPOSITORY):dotnet-latest
+push-dotnet-core-latest: run-dotnet-core-latest
+	$(DOCKER) push $(REPOSITORY):dotnet-core-latest
 
-build-dotnet-2-sdk:
-	$(DOCKER) build -t $(REPOSITORY):dotnet-2-sdk flavors/dotnet/2-sdk
+build-dotnet-core-2-sdk:
+	$(DOCKER) build -t $(REPOSITORY):dotnet-core-2-sdk flavors/dotnet-core/2-sdk
 
-run-dotnet-2-sdk: run-dotnet-2-sdk-Default run-dotnet-2-sdk-Hello-World
+run-dotnet-core-2-sdk: run-dotnet-core-2-sdk-Default run-dotnet-core-2-sdk-Hello-World
 
-run-dotnet-2-sdk-Default: build-dotnet-2-sdk
-	$(DOCKER_RUN) $(REPOSITORY):dotnet-2-sdk
+run-dotnet-core-2-sdk-Default: build-dotnet-core-2-sdk
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-core-2-sdk
 
-run-dotnet-2-sdk-Hello-World: build-dotnet-2-sdk
-	$(DOCKER_RUN) $(REPOSITORY):dotnet-2-sdk --target=Hello-World
+run-dotnet-core-2-sdk-Hello-World: build-dotnet-core-2-sdk
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-core-2-sdk --target=Hello-World
 
-push-dotnet-2-sdk: run-dotnet-2-sdk
-	$(DOCKER) push $(REPOSITORY):dotnet-2-sdk
+push-dotnet-core-2-sdk: run-dotnet-core-2-sdk
+	$(DOCKER) push $(REPOSITORY):dotnet-core-2-sdk
+
+build-dotnet-framework-sdk:
+	$(DOCKER) build -t $(REPOSITORY):dotnet-framework-sdk flavors/dotnet-framework/sdk
+
+run-dotnet-framework-sdk: run-dotnet-framework-sdk-Default run-dotnet-framework-sdk-Hello-World
+
+run-dotnet-framework-sdk-Default: build-dotnet-framework-sdk
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-framework-sdk
+
+run-dotnet-framework-sdk-Hello-World: build-dotnet-framework-sdk
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-framework-sdk --target=Hello-World
+
+push-dotnet-framework-sdk: run-dotnet-framework-sdk
+	$(DOCKER) push $(REPOSITORY):dotnet-framework-sdk
