@@ -36,3 +36,4 @@ run-dotnet-2-sdk-Hello-World: build-dotnet-2-sdk
 	$(DOCKER_RUN) $(REPOSITORY):dotnet-2-sdk --target=Hello-World
 
 push-dotnet-2-sdk: run-dotnet-2-sdk
+	$(DOCKER) push $(REPOSITORY):dotnet-2-sdk

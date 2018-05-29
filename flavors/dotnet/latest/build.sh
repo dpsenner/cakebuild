@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-TOOLS_DIR=$SCRIPT_DIR/tools
+TOOLS_DIR=/tmp/cake/tools
 CAKE_CORECLR=$TOOLS_DIR/Cake.CoreCLR
 CAKE_DLL=$CAKE_CORECLR/Cake.dll
 
 # Make sure the tools folder exists.
 if [ ! -d "$TOOLS_DIR" ]; then
-	mkdir "$TOOLS_DIR"
+	mkdir -p "$TOOLS_DIR"
 fi
 
 # Install Cake.CoreCLR
