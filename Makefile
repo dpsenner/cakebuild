@@ -4,36 +4,36 @@ DOCKER_RUN=$(DOCKER) run --rm -v $(shell pwd)/test/workspace:/workspace -w /work
 
 default: run-all
 
-build-all: build-debian-stretch build-dotnet-sdk-2.1.4
+build-all: build-dotnet-latest build-dotnet-2-sdk
 
-push-all: push-debian-stretch push-dotnet-sdk-2.1.4
+push-all: push-dotnet-latest push-dotnet-2-sdk
 
-run-all: run-debian-stretch run-dotnet-sdk-2.1.4
+run-all: run-dotnet-latest run-dotnet-2-sdk
 
-build-debian-stretch:
-	$(DOCKER) build -t $(REPOSITORY):debian-stretch flavors/debian/stretch
+build-dotnet-latest:
+	$(DOCKER) build -t $(REPOSITORY):dotnet-latest flavors/dotnet/latest
 
-run-debian-stretch: run-debian-stretch-Default run-debian-stretch-Hello-World
+run-dotnet-latest: run-dotnet-latest-Default run-dotnet-latest-Hello-World
 
-run-debian-stretch-Default: build-debian-stretch
-	$(DOCKER_RUN) $(REPOSITORY):debian-stretch
+run-dotnet-latest-Default: build-dotnet-latest
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-latest
 
-run-debian-stretch-Hello-World: build-debian-stretch
-	$(DOCKER_RUN) $(REPOSITORY):debian-stretch --target=Hello-World
+run-dotnet-latest-Hello-World: build-dotnet-latest
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-latest --target=Hello-World
 
-push-debian-stretch: run-debian-stretch
-	$(DOCKER) push $(REPOSITORY):debian-stretch
+push-dotnet-latest: run-dotnet-latest
+	$(DOCKER) push $(REPOSITORY):dotnet-latest
 
-build-dotnet-sdk-2.1.4: build-debian-stretch
-	$(DOCKER) build -t $(REPOSITORY):dotnet-sdk-2.1.4 flavors/dotnet-sdk/2.1.4
+build-dotnet-2-sdk:
+	$(DOCKER) build -t $(REPOSITORY):dotnet-2-sdk flavors/dotnet/2-sdk
 
-run-dotnet-sdk-2.1.4: run-dotnet-sdk-2.1.4-Default run-dotnet-sdk-2.1.4-Hello-World
+run-dotnet-2-sdk: run-dotnet-2-sdk-Default run-dotnet-2-sdk-Hello-World
 
-run-dotnet-sdk-2.1.4-Default: build-dotnet-sdk-2.1.4
-	$(DOCKER_RUN) $(REPOSITORY):dotnet-sdk-2.1.4
+run-dotnet-2-sdk-Default: build-dotnet-2-sdk
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-2-sdk
 
-run-dotnet-sdk-2.1.4-Hello-World: build-dotnet-sdk-2.1.4
-	$(DOCKER_RUN) $(REPOSITORY):dotnet-sdk-2.1.4 --target=Hello-World
+run-dotnet-2-sdk-Hello-World: build-dotnet-2-sdk
+	$(DOCKER_RUN) $(REPOSITORY):dotnet-2-sdk --target=Hello-World
 
-push-dotnet-sdk-2.1.4: run-dotnet-sdk-2.1.4
-	$(DOCKER) push $(REPOSITORY):dotnet-sdk-2.1.4
+push-dotnet-2-sdk: run-dotnet-2-sdk
+	$(DOCKER) push $(REPOSITORY):dotnet-2-sdk
