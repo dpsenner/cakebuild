@@ -4,4 +4,4 @@ FROM microsoft/dotnet-framework:sdk
 COPY build.ps1 C:/build.ps1
 
 # Make the bootstrapper script the docker entrypoint
-ENTRYPOINT ["C:/build.ps1"]
+ENTRYPOINT ["powershell", "C:/build.ps1"]
