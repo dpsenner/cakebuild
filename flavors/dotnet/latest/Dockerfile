@@ -1,13 +1,7 @@
-FROM debian:9
+FROM microsoft/dotnet:latest
 
-# apt update and upgrade
-RUN apt-get update && apt-get upgrade -y
-
-# install cake requirements
-RUN apt-get install -y curl mono-complete
-
-# clean up package lists
-RUN apt-get clean
+# Install requirements
+RUN apt-get update && apt-get install unzip && apt-get clean
 
 # Copy bootstrapper script
 COPY build.sh /usr/local/bin/build.sh
